@@ -2,6 +2,12 @@
 # and the Temporal worker), with two Railway fixes. Bump the tag to upgrade.
 FROM ghcr.io/gitroomhq/postiz-app:v2.25.3
 
+# Meta rejects Postiz's legacy read_insights scope for this app. Keep the
+# Facebook Page OAuth request to the two permissions needed to select pages
+# and publish posts. The local patch fails the build if upstream changes.
+COPY patch-facebook-scope.cjs /tmp/patch-facebook-scope.cjs
+RUN node /tmp/patch-facebook-scope.cjs && rm /tmp/patch-facebook-scope.cjs
+
 # Postiz sets its auth cookie on the registrable domain of FRONTEND_URL. On a
 # *.up.railway.app address that is ".railway.app", so the session would be sent
 # to every site hosted on Railway. Rewrite it to the exact host.
