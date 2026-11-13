@@ -6,8 +6,9 @@
 - OAuth app: `DKH Video Automation`, External, In production.
 - Branding: verified and published. Home page: `https://video.mybamus.com/postiz/`; privacy policy: `https://video.mybamus.com/postiz/privacy/`.
 - Requested sensitive scopes: `youtube.readonly` and `youtube.upload`. The DKH Postiz patch removes default YouTube Partner, analytics, full-management and `force-ssl` scopes from new OAuth requests.
-- Data access: **not verified**. Google still blocks OAuth for the Yoenik account. The existing Yoenik Postiz connection remains on the prior OAuth client, which is in Testing and therefore is not a durable solution.
-- Postiz production currently uses the prior OAuth client. Do not switch it to the DKH client until the new OAuth flow can complete and the channel can be reconnected and tested.
+- Data access: **not verified**. Google blocks OAuth for the dedicated DKH app on the Yoenik account.
+- Postiz production currently uses the prior OAuth client in Testing. On 13 November 2026, all seven brand YouTube channels were visible in Postiz: Mybamus Official, Yoenik Apparel, Siselyo Official, Selxzi Official, Key Photo Production, Key Clothing Production, and MYG Reseller & Grosir. The eight OAuth test users are those seven brand Google accounts plus creatordkh@gmail.com. Channel presence is not proof of successful upload for every channel; only Yoenik has had a private upload test.
+- These Testing OAuth refresh tokens can expire after seven days, so this is a temporary connection. Do not switch Postiz to the DKH client until the new OAuth flow can complete and the channels can be reconnected and tested.
 
 ## Scope justification draft (Google Cloud Data Access)
 
