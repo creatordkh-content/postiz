@@ -18,6 +18,8 @@ Two fixes are baked in:
 - **The session cookie is host-only.** Postiz sets its login cookie on the parent domain. On a `*.up.railway.app` address that parent domain is `.railway.app`, so the browser would send your session to every app hosted on Railway. This template's nginx rewrites the cookie to your exact host. With a custom domain it does the same.
 - **Sign-up is closed after the first account.** `DISABLE_REGISTRATION=true` lets the first person to sign up create the workspace and blocks everyone after that. Invite teammates from Settings. Set it to `false` if you want public sign-up. No email provider is needed, because accounts are activated straight away when none is configured.
 
+For DKH's video uploader, the YouTube OAuth patch requests only basic profile, email, `youtube.readonly` (identify the selected channel), and `youtube.upload` (publish videos). Postiz's default analytics and YouTube Partner permissions are omitted. Features that need those broader permissions are outside this uploader setup.
+
 ### After deploying
 
 1. Open the Postiz domain and **sign up right away**. The first account owns the instance.

@@ -21,6 +21,24 @@ const replacements = {
     before: ['threads_basic', 'threads_content_publish', 'threads_manage_replies', 'threads_manage_insights'],
     after: ['threads_basic', 'threads_content_publish', 'threads_manage_replies', 'threads_manage_insights', 'threads_read_replies'],
   },
+  'youtube.provider.js': {
+    before: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+      'https://www.googleapis.com/auth/youtube',
+      'https://www.googleapis.com/auth/youtube.force-ssl',
+      'https://www.googleapis.com/auth/youtube.readonly',
+      'https://www.googleapis.com/auth/youtube.upload',
+      'https://www.googleapis.com/auth/youtubepartner',
+      'https://www.googleapis.com/auth/yt-analytics.readonly',
+    ],
+    after: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+      'https://www.googleapis.com/auth/youtube.readonly',
+      'https://www.googleapis.com/auth/youtube.upload',
+    ],
+  },
 };
 
 function visit(dir, files) {
