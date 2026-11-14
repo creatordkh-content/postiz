@@ -1,5 +1,7 @@
 # Deploy and Host Postiz on Railway
 
+**DKH operations:** read [HANDOFF.md](HANDOFF.md) for the current Grok Bot connection, channel status, Facebook/Instagram publishing workflow, and remaining checks.
+
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/postiz-production?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=postiz-production)
 
 [Postiz](https://postiz.com/) is an open-source social media scheduler. You write a post once, then schedule or publish it to X, LinkedIn, Instagram, Facebook, Threads, Bluesky, Mastodon, YouTube, TikTok, Pinterest, Reddit, Discord, Telegram and more than 20 other channels. It has a calendar, an AI writer, team workspaces, comments and approvals, analytics, a public API and an MCP server for AI agents. This template runs Postiz v2.25.3 with its own Temporal server on Postgres, so it needs no Elasticsearch.
