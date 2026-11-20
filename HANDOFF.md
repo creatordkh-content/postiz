@@ -1,6 +1,14 @@
 # Handoff operasional Postiz DKH
 
-Terakhir diperiksa: **14 November 2026 (WIB)**. Dokumen ini mencatat keadaan yang terlihat saat pemeriksaan, bukan janji bahwa token platform akan berlaku selamanya. Periksa kembali status kanal sebelum membuat antrean baru.
+## Pembaruan 20 November 2026 — penghematan token Hermes
+
+- Classai Router untuk akun DKH menampilkan sekitar **133 juta kredit** (≈ Rp19.965) saat diperiksa 20 Nov. Ini saldo **bersama semua API key**, bukan saldo khusus Hermes. Dalam tujuh hari sebelumnya tercatat 867 juta kredit untuk 872 request, 99,6 juta token input dan 504 ribu token output. Beberapa request terakhir membawa lebih dari 200 ribu token input. Angka ini dapat berubah; lihat dashboard Classai sebelum membuat proyeksi biaya baru.
+- Railway Function `grok-hermes-bridge` di proyek `Lead & hermes` kini memberi **sesi Hermes tersendiri untuk setiap `task_id`** (`dkh:grok:upload:<task_id>`). Sebelumnya semua tugas memakai sesi bersama `dkh:grok:uploader`, sehingga riwayat upload sebelumnya dapat ikut terkirim lagi. Idempotency key tetap `grok-<task_id>` dan mekanisme claim serta writeback ERP tidak diubah.
+- Deployment Railway `68827158-ac95-4da7-b9e6-057eedbb32c4` berstatus `SUCCESS`; `GET /health` mengembalikan `{"bridge":"ok","erpWriteback":true}`. Snapshot kode produksi ada di [`ops/grok-hermes-bridge/index.ts`](ops/grok-hermes-bridge/index.ts) dan prosedur pembaruan di [`ops/grok-hermes-bridge/README.md`](ops/grok-hermes-bridge/README.md). Repo ini **tidak otomatis men-deploy** Function tersebut.
+- **Belum terukur penghematan nyata per upload.** Belum ada tugas publikasi baru yang dijalankan hanya untuk uji biaya, dan perubahan ini hanya mengenai jalur Grok → Hermes. Perintah langsung di webapp Hermes atau grup agen masih dapat membawa riwayat panjang. Pantau token input per run di Classai setelah pekerjaan berikutnya.
+- Alur ideal selanjutnya: konsep ERP `Ready To post` berisi metadata final → validasi dan claim deterministik → Postiz/kanal resmi → receipt per platform → writeback ERP. Panggil model AI hanya untuk kasus pengecualian. Bridge saat ini **masih memulai satu run AI per tugas upload**; jangan mengklaim uploader tanpa AI sudah selesai.
+
+Pembaruan infrastruktur terakhir: **20 November 2026 (WIB)**. Status kanal di bawah terakhir diperiksa **14 November 2026**. Dokumen ini mencatat keadaan yang terlihat saat pemeriksaan, bukan janji bahwa token platform akan berlaku selamanya. Periksa kembali status kanal sebelum membuat antrean baru.
 
 ## Ringkasan perubahan terbaru
 
