@@ -1,5 +1,13 @@
 # Handoff operasional Postiz DKH
 
+## Pembaruan 20 November 2026 — audit boros token
+
+- Dashboard Classai menunjukkan saldo sekitar **133 juta kredit** (≈ Rp19.965). Dalam tujuh hari, API key `Default` yang juga dipakai Hermes mencatat **868 request, 99,6 juta input token, 503 ribu output token, dan 866 juta kredit**. Ini belum tentu semuanya dari Hermes karena key dapat dipakai layanan lain. Banyak request terakhir membawa **200–300 ribu input token**; cache hit 95% tetap menimbulkan biaya.
+- Log Railway `hermes-social` memperlihatkan panggilan tambahan `thread=bg-review` dengan model berbayar `deepseek-v4.1-flash-1017`. Kode Hermes upstream menjelaskan review otomatis setelah turn dapat membaca ulang konteks percakapan. Kontribusi nominalnya belum dapat dipisahkan dari tagihan key bersama.
+- Pada Railway Console, `auxiliary.background_review.enabled: false` disetel dan **diverifikasi pada 12 config** di volume persisten `/opt/data` (utama dan 11 profil). Ini menghentikan review otomatis; memori dan chat lama tetap ada, pembaruan pengetahuan manual tetap dapat dilakukan. Prosedur untuk profil baru ada di [`ops/hermes-cost-guard/README.md`](ops/hermes-cost-guard/README.md). Tidak ada posting uji yang dibuat.
+- Railway deployment `hermes-social` `fca4f702-4a95-4e99-8365-e96bfb0c0269` berstatus `SUCCESS`. Start command telah dikembalikan ke `/usr/local/bin/ruang-hermes-entrypoint.sh`; percobaan pembatas via start command tidak mengubah config dan tidak digunakan.
+- Variabel Railway `HERMES_INFERENCE_MODEL` mengarah ke model gratis, tetapi **log runtime** menampilkan `deepseek-v4.1-flash-1017` berbayar. Ini bisa berasal dari override sesi/profil; jangan mengklaim semua penggunaan Hermes gratis sampai model aktual per run diverifikasi. Perubahan ini mengurangi panggilan review, bukan batas keras kredit. Bandingkan input token dan kredit per pekerjaan berikutnya di Classai.
+
 ## Pembaruan 20 November 2026 — penghematan token Hermes
 
 - Classai Router untuk akun DKH menampilkan sekitar **133 juta kredit** (≈ Rp19.965) saat diperiksa 20 Nov. Ini saldo **bersama semua API key**, bukan saldo khusus Hermes. Dalam tujuh hari sebelumnya tercatat 867 juta kredit untuk 872 request, 99,6 juta token input dan 504 ribu token output. Beberapa request terakhir membawa lebih dari 200 ribu token input. Angka ini dapat berubah; lihat dashboard Classai sebelum membuat proyeksi biaya baru.
