@@ -1,5 +1,14 @@
 # Handoff operasional Postiz DKH
 
+## Pembaruan 24 November 2026 — rencana pindah Hermes ke OpenBot
+
+- Pemilik memilih **OpenBot desktop (openbot.run)** sebagai tempat agent berikutnya dan berencana menghentikan Hermes di Railway. **Belum ada layanan atau volume Railway yang dihapus.** OpenBot desktop perlu komputer menyala untuk pekerjaan yang dijalankan secara lokal; jadwal unggah tanpa komputer menyala memerlukan host yang selalu aktif atau worker terpisah.
+- Di OpenBot, endpoint custom `ClassAI Router` sudah dibuat dengan URL `https://router.classai.id/v1` dan model `deepseek-v4.1-flash-1017` serta `minimax-m2.7`. ChatGPT masih dalam proses diunduh saat pemeriksaan; API key ClassAI **belum terpasang dan belum diuji**. Jangan menyatakan provider siap hanya karena endpoint terlihat di daftar. Simpan key melalui UI OpenBot, bukan repo.
+- Backup volume Hermes ke `D:\hermes-dkh-backup` sedang dikerjakan secara terpisah pada komputer pemilik. Pada pemeriksaan ini `core.tgz`, `kanban-workspaces.tgz`, `it-fullstack-erp.tgz`, dan `it-fullstack-web.tgz` sudah ada, tetapi rangkaian backup **belum selesai maupun diuji restore**. Verifikasi manifest/arsip sebelum menghapus volume Railway.
+- Panduan resmi OpenBot menyatakan profil Hermes yang berada di server lain dapat diimpor dengan ZIP ekspor Hermes. Profil membawa persona, memori, custom skills, dan job tertentu; **chat lama, kredensial, sesi login, dan pengaturan MCP tidak ikut**. Hubungkan ulang Postiz, ERP, Drive, dan provider sesuai kebutuhan setelah impor, kemudian jalankan uji baca dan satu tugas unggah terkontrol.
+- `hermes-social`, `hermes-webapp-proxy`, dan `grok-hermes-bridge` saling bergantung. Mematikan Hermes memutus Ruang lama dan jalur Grok → Hermes; konektor Grok → Postiz langsung dan layanan Postiz berada di jalur terpisah. Pertahankan `threads-orchestrator`, `Postgres`, `keypp-master-api`, dan layanan lain sampai dependensinya diaudit satu per satu.
+- Urutan pemutusan: selesaikan backup dan impor profil → pasang ulang koneksi → uji alur ERP `Ready to post` ke Postiz beserta receipt/writeback → arahkan Grok ke jalur baru → barulah hentikan layanan Hermes dan proxy; hapus volume hanya setelah backup dapat dipulihkan dan pemilik menyetujui penghapusan permanen.
+
 ## Pembaruan 20 November 2026 — audit boros token
 
 - Dashboard Classai menunjukkan saldo sekitar **133 juta kredit** (≈ Rp19.965). Dalam tujuh hari, API key `Default` yang juga dipakai Hermes mencatat **868 request, 99,6 juta input token, 503 ribu output token, dan 866 juta kredit**. Ini belum tentu semuanya dari Hermes karena key dapat dipakai layanan lain. Banyak request terakhir membawa **200–300 ribu input token**; cache hit 95% tetap menimbulkan biaya.
